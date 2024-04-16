@@ -1,17 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const routes = require('./routes');
 const app = express();
-const port = 3000;
-require('dotenv').config()
+const PORT = 3000;
+app.use(bodyParser.json());
+app.use('/', routes);
 
-// Get request
-app.get('/ping',(req,res)=>{
-  res.json({message:'pong'});
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`🚀 server running on PORT: ${port}`);
-  });
-}
-
-module.exports = app;
